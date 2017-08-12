@@ -1,0 +1,63 @@
+@font-face {
+  font-family: 'Overpass';
+  src:
+    url('../assets/fonts/Overpass-Regular.woff2') format('woff2'),
+    url('../assets/fonts/Overpass-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Overpass';
+  src:
+    url('../assets/fonts/Overpass-Light.woff2') format('woff2'),
+    url('../assets/fonts/Overpass-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'periods-icon';
+  src:
+    url('../assets/fonts/periods-icon.ttf') format('truetype'),
+    url('../assets/fonts/periods-icon.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+i {
+  font-family: 'periods-icon' !important;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.p-fajr:before {
+  content: "\e900";
+}
+.p-shams:before {
+  content: "\e901";
+}
+.p-zuhr:before {
+  content: "\e902";
+}
+.p-asr:before {
+  content: "\e903";
+}
+.p-maghrib:before {
+  content: "\e904";
+}
+.p-isha:before {
+  content: "\e905";
+}
+.p-add_location:before {
+  content: "\e907";
+}
+.p-settings:before {
+  content: "\e906";
+}
