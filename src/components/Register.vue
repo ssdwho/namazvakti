@@ -149,8 +149,8 @@ export default {
       margin: 5px 0;
       height: 40px;
       padding: 10px;
-      background-color: #E3F2FD;
-      border: 1px solid #BBDEFB;
+      background-color: #C8B7C1;
+      border: 1px solid #7E596F;
       border-radius: 2px;
     }
     button {

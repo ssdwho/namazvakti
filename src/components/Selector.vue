@@ -67,7 +67,7 @@ export default {
     width: 56px;
     height: 56px;
     border-radius: 50%;
-    background-color: #2196F3;
+    background-color: #481232;
     color: #FFF;
     font-size: 24px;
     display: flex;
@@ -83,7 +83,7 @@ export default {
     width: 33.3%;
     height: 50px;
     box-sizing: border-box;
-    border: solid #ccc;
+    border: solid #dacfd6;
     border-width: 0 1px 1px 0;
     display: flex;
     justify-content: center;
@@ -92,7 +92,8 @@ export default {
       border-right: none;
     }
     &.selected {
-      background-color: #BBDEFB;
+      background-color: #481232;
+      color: #FFF;
     }
   }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <main :class="[points.class[points.indexPoint]]" id="publishState">
-      <div v-for="(bg, index) in points.class" class="background" :class="[points.class[index]]" :key="index"></div>
+      <div v-for="(bg, index) in points.class" class="background" v-show="points.indexPoint - 1 < index" :class="[points.class[index]]" :key="index"></div>
       <div id="circle">
         <svg id="circle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
           <defs>
@@ -134,6 +134,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../scss/fonts';
   #publishState {
     position: absolute;
     top: 0;
