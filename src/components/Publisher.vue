@@ -1,7 +1,9 @@
 <template>
   <div>
     <main :class="[points.class[points.indexPoint]]" id="publishState">
-      <div v-for="(bg, index) in points.class" class="background" v-show="points.indexPoint - 1 < index" :class="[points.class[index]]" :key="index"></div>
+      <transition-group name="list" tag="div">
+        <div v-for="(bg, index) in points.class" class="background" v-show="points.indexPoint - 1 < index" :class="[points.class[index]]" :key="index"></div>
+      </transition-group>
       <div id="circle">
         <svg id="circle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
           <defs>

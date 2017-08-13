@@ -133,4 +133,10 @@ export default {
   .fade-enter, .fade-leave-to {
     opacity: 0
   }
+  .list-enter-active, .list-leave-active {
+    transition: opacity 1s;
+  }
+  .list-enter, .list-leave-to {
+    opacity: 0;
+  }
 </style>
