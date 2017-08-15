@@ -1,6 +1,6 @@
 {
   "name": "namazvakti",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Namaz Vakti",
   "author": "Salih S. Demir <ssdemir90@gmail.com>",
   "private": false,
@@ -13,7 +13,8 @@
   "dependencies": {
     "axios": "^0.16.2",
     "dexie": "^2.0.0-beta.11",
-    "vue": "^2.3.3"
+    "vue": "^2.3.3",
+    "vuetify": "^0.14.11"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.2",

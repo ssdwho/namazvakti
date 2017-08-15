@@ -1,26 +1,8 @@
 @font-face {
-  font-family: 'Overpass';
-  src:
-    url('../assets/fonts/Overpass-Regular.woff2') format('woff2'),
-    url('../assets/fonts/Overpass-Regular.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Overpass';
-  src:
-    url('../assets/fonts/Overpass-Light.woff2') format('woff2'),
-    url('../assets/fonts/Overpass-Light.woff') format('woff');
-  font-weight: 300;
-  font-style: normal;
-}
-
-@font-face {
   font-family: 'periods-icon';
   src:
-    url('../assets/fonts/periods-icon.ttf') format('truetype'),
-    url('../assets/fonts/periods-icon.woff') format('woff');
+    url('./assets/fonts/periods-icon.ttf') format('truetype'),
+    url('./assets/fonts/periods-icon.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -37,27 +19,51 @@ i {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.p-fajr:before {
-  content: "\e900";
+.p-close:before {
+  content: "\e915";
 }
-.p-shams:before {
-  content: "\e901";
+.p-arrowDown:before {
+  content: "\e914";
 }
-.p-zuhr:before {
-  content: "\e902";
+.p-favorite:before {
+  content: "\e913";
 }
-.p-asr:before {
-  content: "\e903";
+.p-update:before {
+  content: "\e912";
 }
-.p-maghrib:before {
-  content: "\e904";
+.p-info:before {
+  content: "\e911";
+}
+.p-error:before {
+  content: "\e910";
+}
+.p-check:before {
+  content: "\e909";
+}
+.p-delete:before {
+  content: "\e908";
+}
+.p-add:before {
+  content: "\e907";
+}
+.p-menu:before {
+  content: "\e906";
 }
 .p-isha:before {
   content: "\e905";
 }
-.p-add_location:before {
-  content: "\e907";
+.p-maghrib:before {
+  content: "\e904";
 }
-.p-settings:before {
-  content: "\e906";
+.p-asr:before {
+  content: "\e903";
+}
+.p-zuhr:before {
+  content: "\e902";
+}
+.p-shams:before {
+  content: "\e901";
+}
+.p-fajr:before {
+  content: "\e900";
 }

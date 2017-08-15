@@ -1,19 +1,24 @@
 <template>
-  <main id="registerScreen">
-    <select v-model="setCountry" @change="getAndLoad('city', setCountry)">
-      <option value="0" selected disabled>Ülke Seçin</option>
-      <option value="2">TÜRKİYE</option>
-      <option value="1">KUZEY KIBRIS</option>
-    </select>
-    <select v-model="setCity" @change="getAndLoad('town', setCity)">
-      <option value="0" selected disabled>İl Seçin</option>
-      <option v-for="city in listOfCities" :value="city.SehirID" :key="city.index">{{city.SehirAdi}}</option>
-    </select>
-    <select v-model="setTown">
-      <option value="0" selected disabled>İlçe Seçin</option>
-      <option v-for="town in listOfTowns" :value="[town.IlceAdi, town.IlceID]" :key="town.index">{{town.IlceAdi}}</option>
-    </select>
-    <button v-if="setTown != 0" @click="getAndLoad('period', setTown[1])">EKLE</button>
+  <main id="registerScreen" class="mainBack">
+    <section class="whiteContanier">
+      <select v-model="setCountry" @change="getAndLoad('city', setCountry)">
+        <option value="0" selected disabled>ÜLKE SEÇİN</option>
+        <option value="2">TÜRKİYE</option>
+        <option value="1">KUZEY KIBRIS</option>
+      </select>
+      <select v-model="setCity" @change="getAndLoad('town', setCity)" v-show="listOfCities">
+        <option value="0" selected disabled>İL SEÇİN</option>
+        <option v-for="city in listOfCities" :value="city.SehirID" :key="city.index">{{city.SehirAdi}}</option>
+      </select>
+      <select v-model="setTown" v-show="listOfTowns">
+        <option value="0" selected disabled>İLÇE SEÇİN</option>
+        <option v-for="town in listOfTowns" :value="[town.IlceAdi, town.IlceID]" :key="town.index">{{town.IlceAdi}}</option>
+      </select>
+      <footer>
+        <button class="cancelButton" @click="changeRegistration()">VAZGEÇ</button>
+        <button class="submitButton" @click="getAndLoad('period', setTown[1])" :disabled="setTown == 0">EKLE</button>
+      </footer>
+    </section>
   </main>
 </template>
 
@@ -24,7 +29,7 @@ import { apiData, dateArray, periodMs } from '@/helpers/reformat'
 
 export default {
   name: 'register',
-  props: ['changeRegistration', 'changePublication', 'changeSelection', 'setLocationCode', 'getLocatonName', 'getTimes'],
+  props: ['changeRegistration', 'changePublication', 'changeSelection', 'setLocationCode', 'getLocatonName', 'getTimes', 'loadShow', 'errorShow'],
   data () {
     return {
       setCountry: 0,
@@ -38,12 +43,16 @@ export default {
   methods: {
     getAndLoad (action, int) {
       if (parseInt(int) !== 0) {
+        this.loadShow(true)
         axios.get(apiData(action, int)).then((response) => {
+          this.loadShow(false)
           switch (action) {
             case 'city':
+              this.setCity = 0
               this.listOfCities = (response.data)
               break
             case 'town':
+              this.setTown = 0
               this.listOfTowns = (response.data)
               break
             case 'period':
@@ -54,10 +63,10 @@ export default {
                     db.cities.add({city: this.setTown[0], code: parseInt(this.setTown[1])}).then(() => {
                     })
                   } else {
-                    console.log('Bu Şehir Zaten Ekli')
+                    this.errorShow('Bu Şehir Zaten Ekli')
                   }
                 }).catch((error) => {
-                  console.log(error)
+                  this.errorShow(error)
                 })
 
                 db.times.add({city_code: parseInt(this.setTown[1]), periods: this.reformatJson(this.listOfPeriods)}).then(() => {
@@ -72,10 +81,9 @@ export default {
               })
               break
           }
+        }).catch((error) => {
+          this.errorShow(error)
         })
-          .catch((error) => {
-            console.log(error)
-          })
       }
     },
     reformatJson (obj) {
@@ -132,37 +140,26 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../scss/var';
   #registerScreen {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
     z-index: 30;
-    background-color: #FFF;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     select {
-      width: 300px;
-      margin: 5px 0;
-      height: 40px;
-      padding: 10px;
-      background-color: #C8B7C1;
-      border: 1px solid #7E596F;
-      border-radius: 2px;
-    }
-    button {
-      margin: 5px 0;
-      height: 36px;
-      padding: 0 16px;
-      font-size: 14px;
-      font-family: Overpass;
-      background-color: #2196F3;
+      height: 70px;
+      width: 100%;
+      line-height: 70px;
+      font-size: 17px;
+      padding: 0 35px;
+      background-color: rgba(255, 255, 255, 0);
       border: none;
-      border-radius: 2px;
-      color: #FFF;
+      border-bottom: 1px solid $seperator;
+      color: $bg-title-color;
+      outline: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
     }
   }
 </style>

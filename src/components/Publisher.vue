@@ -45,7 +45,7 @@ import { convertCountDown, msToHours } from '@/helpers/publish'
 
 export default {
   name: 'publisher',
-  props: ['locationCode', 'locationName', 'periodDatas'],
+  props: ['locationCode', 'locationName', 'periodDatas', 'loadShow', 'errorShow'],
   data () {
     return {
       moment: '',
@@ -121,7 +121,7 @@ export default {
       return msToHours(ms)
     },
     showHide (ind) {
-      return (this.periods.indexPeriod === 1) && (ind !== 6 && ind !== 7) || (this.periods.indexPeriod > 1 && this.periods.indexPeriod < 6) && (ind !== 0 && ind !== 7) || (this.periods.indexPeriod === 7) && (ind !== 0 && ind !== 1)
+      return (this.periods.indexPeriod === 1) && (ind !== 6 && ind !== 7) || (this.periods.indexPeriod > 1 && this.periods.indexPeriod < 6) && (ind !== 0 && ind !== 7) || (this.periods.indexPeriod >= 6) && (ind !== 0 && ind !== 1)
     }
   },
   computed: {
@@ -136,7 +136,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../scss/fonts';
   #publishState {
     position: absolute;
     top: 0;
