@@ -1,19 +1,25 @@
 <template>
   <main id="registerScreen" class="mainBack">
     <section class="whiteContanier">
-      <select v-model="setCountry" @change="getAndLoad('city', setCountry)">
-        <option value="0" selected disabled>ÜLKE SEÇİN</option>
-        <option value="2">TÜRKİYE</option>
-        <option value="1">KUZEY KIBRIS</option>
-      </select>
-      <select v-model="setCity" @change="getAndLoad('town', setCity)" v-show="listOfCities">
-        <option value="0" selected disabled>İL SEÇİN</option>
-        <option v-for="city in listOfCities" :value="city.SehirID" :key="city.index">{{city.SehirAdi}}</option>
-      </select>
-      <select v-model="setTown" v-show="listOfTowns">
-        <option value="0" selected disabled>İLÇE SEÇİN</option>
-        <option v-for="town in listOfTowns" :value="[town.IlceAdi, town.IlceID]" :key="town.index">{{town.IlceAdi}}</option>
-      </select>
+      <label for="country" class="selectBoxContainer">
+        <select id="country" v-model="setCountry" @change="getAndLoad('city', setCountry)">
+          <option value="0" selected disabled>ÜLKE SEÇİN</option>
+          <option value="2">TÜRKİYE</option>
+          <option value="1">KUZEY KIBRIS</option>
+        </select>
+      </label>
+      <label for="city" class="selectBoxContainer" v-show="listOfCities">
+        <select id="city" v-model="setCity" @change="getAndLoad('town', setCity)">
+          <option value="0" selected disabled>İL SEÇİN</option>
+          <option v-for="city in listOfCities" :value="city.SehirID" :key="city.index">{{city.SehirAdi}}</option>
+        </select>
+      </label>
+      <label for="town" class="selectBoxContainer" v-show="listOfTowns">
+        <select id="town" v-model="setTown">
+          <option value="0" selected disabled>İLÇE SEÇİN</option>
+          <option v-for="town in listOfTowns" :value="[town.IlceAdi, town.IlceID]" :key="town.index">{{town.IlceAdi}}</option>
+        </select>
+      </label>
       <footer>
         <button class="cancelButton" @click="changeRegistration()">VAZGEÇ</button>
         <button class="submitButton" @click="getAndLoad('period', setTown[1])" :disabled="setTown == 0">EKLE</button>
@@ -147,6 +153,9 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+  }
+  .selectBoxContainer {
+    position: relative;
     select {
       height: 70px;
       width: 100%;
@@ -160,6 +169,17 @@ export default {
       outline: none;
       -webkit-appearance: none;
       -moz-appearance: none;
+    }
+    &:after {
+      content: '\e916';
+      font-family: periods-icon;
+      font-size: 24px;
+      color: $primary-color;
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: -1;
     }
   }
 </style>

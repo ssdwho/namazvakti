@@ -19,6 +19,9 @@ i {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.p-arrowSelectBox:before {
+  content: "\e916";
+}
 .p-close:before {
   content: "\e915";
 }
