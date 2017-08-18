@@ -41,11 +41,14 @@
 </template>
 
 <script>
+import axios from 'axios'
+import db from '@/helpers/db'
 import { convertCountDown, msToHours } from '@/helpers/publish'
+import { apiData, reformatJson } from '@/helpers/reformat'
 
 export default {
   name: 'publisher',
-  props: ['locationCode', 'locationName', 'periodDatas', 'loadShow', 'errorShow'],
+  props: ['locationCode', 'locationName', 'locationId', 'periodDatas', 'loadShow', 'errorShow'],
   data () {
     return {
       moment: '',
@@ -81,7 +84,20 @@ export default {
         return item === today
       })
 
-      this.indexToday = INDEX
+      if (INDEX > 29 || INDEX === -1) {
+        this.loadShow(true)
+        axios.get(apiData('period', this.locationCode)).then((response) => {
+          const LIST_OF_PERIODS = (response.data)
+          db.transaction('rw', db.times, () => {
+            db.times.update(this.locationId, {periods: reformatJson(LIST_OF_PERIODS)}).then(() => {
+              this.findIndex()
+            })
+          })
+        })
+      } else {
+        this.loadShow(false)
+        this.indexToday = INDEX
+      }
     },
     countDown (distance) {
       const COUNTER = distance < 0 ? false : convertCountDown(distance)

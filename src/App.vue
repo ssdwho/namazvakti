@@ -5,7 +5,7 @@
     </header>
     <main>
       <transition name="fade">
-        <publisher :error-show="errorShow" :load-show="loadShow" :location-code="locationCode" :location-name="locationName" :period-datas="periodDatas" v-if="publication"></publisher>
+        <publisher :error-show="errorShow" :load-show="loadShow" :location-code="locationCode" :location-name="locationName" :location-id="locationId" :period-datas="periodDatas" v-if="publication"></publisher>
       </transition>
       <transition name="fade">
         <selector :error-show="errorShow" :load-show="loadShow" :change-registration="changeRegistration" :change-selection="changeSelection" :change-publication="changePublication" :set-location-code="setLocationCode" :get-location-name="getLocationName" :get-times="getTimes" v-if="selection"></selector>
@@ -56,6 +56,7 @@ export default {
       publication: false,
       locationCode: '',
       locationName: '',
+      locationId: '',
       periodDatas: '',
       pointDatas: '',
       loading: true,
@@ -81,6 +82,7 @@ export default {
     getLocationName (lCode) {
       db.cities.get({code: lCode}).then((value) => {
         this.locationName = value.city
+        this.locationId = value.id
       })
     },
     getTimes (lCode) {
@@ -89,7 +91,7 @@ export default {
         this.publication = true
         setTimeout(() => {
           this.loadShow(false)
-        }, 2000)
+        }, 1000)
       })
     },
     errorShow (error) {
@@ -279,13 +281,10 @@ export default {
   .fade-enter-active, .fade-leave-active {
     transition: opacity .2s
   }
-  .fade-enter, .fade-leave-to {
+  .fade-enter, .fade-leave-to, .list-enter, .list-leave-to {
     opacity: 0
   }
   .list-enter-active, .list-leave-active {
-    transition: opacity .2s;
-  }
-  .list-enter, .list-leave-to {
-    opacity: 0;
+    transition: opacity .5s;
   }
 </style>
