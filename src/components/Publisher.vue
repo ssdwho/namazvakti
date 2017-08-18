@@ -124,8 +124,6 @@ export default {
       return (this.periods.indexPeriod === 1) && (ind !== 6 && ind !== 7) || (this.periods.indexPeriod > 1 && this.periods.indexPeriod < 6) && (ind !== 0 && ind !== 7) || (this.periods.indexPeriod >= 6) && (ind !== 0 && ind !== 1)
     }
   },
-  computed: {
-  },
   mounted () {
     setInterval(this.liveTimer, 1000)
   },

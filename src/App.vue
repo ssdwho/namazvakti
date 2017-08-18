@@ -99,8 +99,6 @@ export default {
       this.loading = boo
     }
   },
-  computed: {
-  },
   beforeCreate () {
     db.transaction('rw', db.settings, db.cities, db.times, () => {
       db.settings.get({id: 1}).then(value => {
@@ -123,13 +121,9 @@ export default {
         }
       })
       .catch((error) => {
-        console.log(error)
+        this.errorShow(error)
       })
     })
-  },
-  created () {
-  },
-  mounted () {
   }
 }
 </script>
