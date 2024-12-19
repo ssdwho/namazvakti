@@ -1,4 +1,4 @@
-const API_URL = 'https://ezanvakti.herokuapp.com/'
+const API_URL = 'https://ezanvakti.emushaf.net/'
 
 export function apiData (action, int) {
   let REQ
